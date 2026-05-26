@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academia - Best Online Learning Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --blue-primary: #1a6dcc; --blue-dark: #0d47a1; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Open Sans', sans-serif; margin: 0; padding: 0; }
+
+    /* TOP BAR */
+    .topbar { background:#1a1a1a; padding:10px 24px; display:flex; align-items:center; justify-content:space-between; }
+    .topbar-brand { color:#fff; font-size:15px; font-family:'Poppins',sans-serif; font-weight:600; display:flex; align-items:center; gap:6px; text-decoration:none; }
+    .topbar-brand .envato-icon { color:#82b541; font-size:18px; }
+    .btn-buy { background:#82b541; color:#fff; border:none; padding:8px 22px; border-radius:4px; font-family:'Poppins',sans-serif; font-weight:600; font-size:14px; cursor:pointer; transition:background .2s; }
+    .btn-buy:hover { background:#6a9a34; }
+
+    /* NAVBAR */
+    .main-navbar { background:#fff; box-shadow:0 2px 8px rgba(0,0,0,.08); padding:0 32px; position:sticky; top:0; z-index:1000; }
+    .navbar-brand { display:flex; align-items:center; gap:8px; text-decoration:none; }
+    .brand-icon { background:var(--blue-primary); color:#fff; width:42px; height:42px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+    .brand-text { font-family:'Poppins',sans-serif; font-weight:700; font-size:22px; color:var(--blue-primary); letter-spacing:2px; text-transform:uppercase; }
+    .main-navbar .nav-link { font-family:'Poppins',sans-serif; font-weight:500; font-size:14.5px; color:#333; padding:28px 14px !important; transition:color .2s; }
+    .main-navbar .nav-link:hover, .main-navbar .nav-link.active { color:var(--blue-primary); }
+    .main-navbar .nav-link.active { border-bottom:3px solid var(--blue-primary); }
+    .navbar-icons a { color:#444; font-size:18px; margin-left:16px; text-decoration:none; transition:color .2s; }
+    .navbar-icons a:hover { color:var(--blue-primary); }
+
+    /* HERO */
+    .hero-section { position:relative; height:calc(100vh - 110px); display:flex; align-items:center; overflow:hidden; background:#0a1940; }
+    .hero-bg { position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1400&q=80'); background-size:cover; background-position:center right; }
+    .hero-overlay { position:absolute; inset:0; background:rgba(10,25,60,.55); }
+    .hero-content { position:relative; z-index:2; padding:80px 0; }
+    .hero-eyebrow { font-size:13px; font-weight:600; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,.80); margin-bottom:18px; }
+    .hero-title { font-family:'Poppins',sans-serif; font-size:clamp(32px,4.5vw,54px); font-weight:800; color:#fff; line-height:1.18; margin-bottom:20px; }
+    .hero-sub { font-size:16px; color:rgba(255,255,255,.85); margin-bottom:38px; }
+    .btn-hero-primary { background:var(--blue-primary); color:#fff; border:none; padding:14px 34px; border-radius:4px; font-family:'Poppins',sans-serif; font-weight:600; font-size:15px; text-decoration:none; display:inline-block; transition:background .2s,transform .2s; }
+    .btn-hero-primary:hover { background:var(--blue-dark); color:#fff; transform:translateY(-2px); }
+    .btn-hero-outline { background:transparent; color:#fff; border:2px solid #fff; padding:12px 32px; border-radius:4px; font-family:'Poppins',sans-serif; font-weight:600; font-size:15px; text-decoration:none; display:inline-block; transition:background .2s,color .2s,transform .2s; }
+    .btn-hero-outline:hover { background:#fff; color:var(--blue-primary); transform:translateY(-2px); }
+
+    /* FEATURES BANNER */
+    .features-banner { background:linear-gradient(135deg,#1a6dcc 0%,#1244a0 100%); padding:50px 0; position:relative; overflow:hidden; }
+    .features-banner::before { content:''; position:absolute; inset:0; background-image:radial-gradient(ellipse at 15% 50%,rgba(255,255,255,.08) 0%,transparent 55%),radial-gradient(ellipse at 85% 50%,rgba(255,255,255,.05) 0%,transparent 55%); pointer-events:none; }
+    .features-banner::after { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.02) 0px,rgba(255,255,255,.02) 1px,transparent 1px,transparent 12px); pointer-events:none; }
+    .feature-item { display:flex; align-items:center; gap:20px; padding:10px 40px; border-right:1px solid rgba(255,255,255,.18); position:relative; z-index:1; }
+    .feature-item:last-child { border-right:none; }
+    .feature-icon { font-size:44px; color:#fff; min-width:54px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .support-badge { font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:#fff; border:2.5px solid #fff; border-radius:50%; width:52px; height:52px; display:flex; align-items:center; justify-content:center; position:relative; }
+    .support-badge::after { content:'↻'; position:absolute; top:-14px; right:-14px; font-size:16px; color:rgba(255,255,255,.8); }
+    .feature-item h5 { font-family:'Poppins',sans-serif; font-weight:700; font-size:18px; color:#fff; margin:0 0 5px; }
+    .feature-item p { font-size:14px; color:rgba(255,255,255,.82); margin:0; }
+
+    /* CATEGORIES */
+    .categories-section { background:#f5f6fa; padding:80px 0 90px; }
+    .section-title { font-family:'Poppins',sans-serif; font-weight:800; font-size:clamp(24px,3vw,36px); color:#111827; margin-bottom:10px; }
+    .section-sub { font-size:15px; color:#6b7280; margin-bottom:0; }
+    .category-card { display:flex; align-items:center; gap:16px; background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:14px 18px; text-decoration:none; transition:box-shadow .25s,transform .25s,border-color .25s; }
+    .category-card:hover { box-shadow:0 8px 28px rgba(26,109,204,.13); transform:translateY(-4px); border-color:var(--blue-primary); }
+    .category-card img { width:84px; height:62px; object-fit:cover; border-radius:6px; flex-shrink:0; }
+    .cat-info h6 { font-family:'Poppins',sans-serif; font-weight:700; font-size:15px; color:#111827; margin:0 0 4px; }
+    .cat-info span { font-size:13px; color:#6b7280; }
+
+    @media(max-width:768px) {
+      .feature-item { border-right:none; border-bottom:1px solid rgba(255,255,255,.15); padding:18px 20px; }
+      .feature-item:last-child { border-bottom:none; }
+    }
+    @media(max-width:576px) {
+      .btn-hero-outline { margin-top:10px; }
+      .hero-content { padding:60px 0; }
+    }
+
+    /* ── FEATURED COURSES ── */
+    .featured-courses-section {
+      background: #f5f6fa;
+      padding: 80px 0 90px;
+    }
+    .course-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow .25s, transform .25s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .course-card:hover {
+      box-shadow: 0 10px 32px rgba(26,109,204,.14);
+      transform: translateY(-4px);
+    }
+    .course-img-wrap {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+    .course-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .course-card:hover .course-img-wrap img { transform: scale(1.04); }
+    .course-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .course-stars {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    .course-stars > div { display: block; }
+    .star { color: #d1a82a; font-size: 15px; }
+    .star.filled { color: #f0a500; }
+    .review-count { font-size: 13px; color: #6b7280; margin-left: 4px; }
+    .course-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #111827;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+    .course-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .course-meta span { display: flex; align-items: center; gap: 5px; }
+    .course-meta i { font-size: 14px; }
+    .course-divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 14px 0;
+    }
+    .course-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+    .course-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .course-author img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .course-author a {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--blue-primary);
+      text-decoration: none;
+    }
+    .course-author a:hover { text-decoration: underline; }
+    .course-price {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: #111827;
+    }
+    .btn-explore {
+      display: inline-block;
+      border: 2px solid var(--blue-primary);
+      color: var(--blue-primary);
+      background: transparent;
+      padding: 13px 48px;
+      border-radius: 4px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background .2s, color .2s, transform .2s;
+    }
+    .btn-explore:hover {
+      background: var(--blue-primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ── STATS BANNER ── */
+    .stats-banner {
+      background: #0d0a3e;
+      padding: 70px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .stats-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 70% 50%, rgba(255,255,255,0.02) 0%, transparent 50%);
+    }
+    /* dot grid decoration */
+    .stats-banner::after {
+      content: '';
+      position: absolute;
+      right: 60px;
+      bottom: 30px;
+      width: 120px;
+      height: 100px;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.18) 1.5px, transparent 1.5px);
+      background-size: 14px 14px;
+    }
+    /* circle decoration */
+    .stats-circle-deco {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: 10px solid rgba(255,255,255,0.08);
+      border-radius: 50%;
+      top: 50%;
+      left: 23%;
+      transform: translateY(-50%);
+    }
+    .stat-item {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(36px, 5vw, 60px);
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.80);
+      letter-spacing: 0.3px;
+    }
+    .stat-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+      align-self: stretch;
+      margin: 0 10px;
+    }
+
+    /* ── WHY CHOOSE US ── */
+    .why-choose-section {
+      background: #fff;
+      padding: 90px 0 80px;
+    }
+    .why-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: clamp(26px, 3.5vw, 40px);
+      color: #111827;
+      margin-bottom: 40px;
+    }
+    .why-item {
+      display: flex;
+      gap: 22px;
+      margin-bottom: 38px;
+    }
+    .why-item:last-child { margin-bottom: 0; }
+    .why-icon {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .why-icon svg {
+      width: 62px;
+      height: 62px;
+      stroke: var(--blue-primary);
+      fill: none;
+      stroke-width: 1.5;
+    }
+    .why-text h5 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: #111827;
+      margin: 0 0 8px;
+    }
+    .why-text p {
+      font-size: 14.5px;
+      color: #6b7280;
+      line-height: 1.7;
+      margin: 0;
+    }
+    .why-images {
+      position: relative;
+      height: 540px;
+    }
+    .why-img-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 73%;
+      height: 58%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .why-img-bottom {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 68%;
+      height: 55%;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+
+    @media(max-width:991px) {
+      .why-images { height: 360px; margin-top: 40px; }
+    }
+    @media(max-width:576px) {
+      .stat-divider { display:none; }
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      background: #f5f6fa;
+      padding: 80px 0 70px;
+    }
+    .testi-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 36px 32px 30px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .testi-card:hover {
+      box-shadow: 0 10px 34px rgba(26,109,204,.12);
+      transform: translateY(-4px);
+    }
+    .testi-quote {
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--blue-primary);
+      line-height: 1;
+      margin-bottom: 14px;
+      font-family: Georgia, serif;
+    }
+    .testi-stars {
+      margin-bottom: 18px;
+    }
+    .testi-stars .star {
+      color: #f0a500;
+      font-size: 18px;
+    }
+    .testi-text {
+      font-size: 14.5px;
+      color: #4b5563;
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: auto;
+    }
+    .testi-author img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .testi-author-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #111827;
+      margin: 0 0 2px;
+    }
+    .testi-author-role {
+      font-size: 13px;
+      color: #6b7280;
+      margin: 0;
+    }
+    /* slider dots */
+    .testi-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .testi-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #c5cad3;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .testi-dot.active {
+      background: var(--blue-primary);
+      transform: scale(1.15);
+    }
+
+    /* ── OUR BLOG ── */
+    .blog-section {
+      background: #fff;
+      padding: 80px 0 90px;
+    }
+    .blog-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .blog-card:hover {
+      box-shadow: 0 10px 32px rgba(26,109,204,.13);
+      transform: translateY(-4px);
+    }
+    .blog-img-wrap {
+      width: 100%;
+      height: 230px;
+      overflow: hidden;
+    }
+    .blog-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .blog-card:hover .blog-img-wrap img { transform: scale(1.04); }
+    .blog-body {
+      padding: 22px 24px 26px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .blog-meta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 14px;
+    }
+    .blog-meta span { display: flex; align-items: center; gap: 5px; }
+    .blog-meta i { font-size: 14px; color: var(--blue-primary); }
+    .blog-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: #111827;
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+    .blog-excerpt {
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.75;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .blog-read-more {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--blue-primary);
+      text-decoration: none;
+      transition: gap .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: auto;
+    }
+    .blog-read-more:hover { text-decoration: underline; color: var(--blue-dark); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: #0d1b3e;
+      padding: 70px 0 0;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      text-decoration: none;
+    }
+    .footer-brand-icon {
+      background: var(--blue-primary);
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .footer-brand-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--blue-primary);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .footer-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.8;
+      margin-bottom: 0;
+    }
+    .footer-col-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    .footer-links li a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: color .2s;
+    }
+    .footer-links li a:hover { color: var(--blue-primary); }
+    .footer-links li a::before {
+      content: '›';
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue-primary);
+      line-height: 1;
+    }
+    .footer-bottom {
+      background: #091429;
+      margin-top: 60px;
+      padding: 18px 0;
+      text-align: center;
+    }
+    .footer-bottom p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <a href="#" class="topbar-brand">
+      <span class="envato-icon"><i class="bi bi-lightning-charge-fill"></i></span>
+      envato<strong>market</strong>
+    </a>
+    <button class="btn-buy">Buy now</button>
+  </div>
+
+  <!-- MAIN NAVBAR -->
+  <nav class="main-navbar d-flex align-items-center">
+    <a class="navbar-brand" href="#">
+      <div class="brand-icon"><i class="bi bi-book-half"></i></div>
+      <span class="brand-text">Academia</span>
+    </a>
+    <div class="d-none d-lg-flex align-items-center ms-auto">
+      <a href="#" class="nav-link active">Home <i class="bi bi-chevron-down" style="font-size:10px"></i></a>
+      <a href="#" class="nav-link">Pages <i class="bi bi-chevron-down" style="font-size:10px"></i></a>
+      <a href="#" class="nav-link">Courses <i class="bi bi-chevron-down" style="font-size:10px"></i></a>
+      <a href="#" class="nav-link">Notices <i class="bi bi-chevron-down" style="font-size:10px"></i></a>
+      <a href="#" class="nav-link">Blog <i class="bi bi-chevron-down" style="font-size:10px"></i></a>
+      <a href="#" class="nav-link">Contact</a>
+    </div>
+    <div class="navbar-icons d-none d-lg-flex align-items-center">
+      <a href="#"><i class="bi bi-search"></i></a>
+      <a href="#"><i class="bi bi-cart3"></i></a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 col-md-9 hero-content">
+          <p class="hero-eyebrow">Learn From Experts</p>
+          <h1 class="hero-title">Best Online Learning<br>Platform Of The World</h1>
+          <p class="hero-sub">More than 11500 online courses are available in our platform</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="#" class="btn-hero-primary">Join For Free</a>
+            <a href="#" class="btn-hero-outline">Find Courses</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES BANNER -->
+  <section class="features-banner">
+    <div class="container">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-person-badge"></i></div>
+            <div>
+              <h5>Expert Instructors</h5>
+              <p>All instructors are highly experienced</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="feature-item">
+            <div class="feature-icon"><i class="bi bi-lock-fill"></i></div>
+            <div>
+              <h5>Lifetime access</h5>
+              <p>Lifetime access for all of our courses</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-12">
+          <div class="feature-item">
+            <div class="feature-icon"><span class="support-badge">24/7</span></div>
+            <div>
+              <h5>Dedicated Support</h5>
+              <p>We provide 24/7 dedicated support</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BROWSE COURSES BY CATEGORY -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Browse Courses by Category</h2>
+        <p class="section-sub">More than 500+ courses are available</p>
+      </div>
+      <div class="row g-4">
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=160&h=110&fit=crop" alt="Programming"/>
+            <div class="cat-info"><h6>Programming</h6><span>2 Courses</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=160&h=110&fit=crop" alt="Web Design"/>
+            <div class="cat-info"><h6>Web Design</h6><span>1 Course</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=160&h=110&fit=crop" alt="Business"/>
+            <div class="cat-info"><h6>Business</h6><span>1 Course</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=160&h=110&fit=crop" alt="Development"/>
+            <div class="cat-info"><h6>Development</h6><span>2 Courses</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=160&h=110&fit=crop" alt="Graphic Design"/>
+            <div class="cat-info"><h6>Graphic Design</h6><span>1 Course</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=160&h=110&fit=crop" alt="Data Science"/>
+            <div class="cat-info"><h6>Data Science</h6><span>1 Course</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=160&h=110&fit=crop" alt="Marketing"/>
+            <div class="cat-info"><h6>Marketing</h6><span>1 Course</span></div>
+          </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="category-card">
+            <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?w=160&h=110&fit=crop" alt="UX/UI Design"/>
+            <div class="cat-info"><h6>UX/UI Design</h6><span>2 Courses</span></div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FEATURED COURSES -->
+  <section class="featured-courses-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Featured Courses</h2>
+        <p class="section-sub">More than 500+ courses are available</p>
+      </div>
+      <div class="row g-4">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=340&fit=crop" alt="Blender 3D"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">Blender Creator: Learn 3D Modelling for Beginners</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 95 Students</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$43.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=340&fit=crop" alt="Deep Learning"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">Deep Learning Prerequisites: Linear Regression in Python</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 0 Student</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$17.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=340&fit=crop" alt="Web Dev"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">Web Development Masterclass & Certifications Course</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 0 Student</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$29.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=340&fit=crop" alt="Financial Analyst"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">The Complete Financial Analyst Training Course</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 0 Student</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$19.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=340&fit=crop" alt="Drawing"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">The Ultimate Drawing Course — Beginner to Advanced</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 0 Student</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$15.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="course-card">
+            <div class="course-img-wrap">
+              <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=600&h=340&fit=crop" alt="Photoshop"/>
+            </div>
+            <div class="course-body">
+              <div class="course-stars">
+                <span class="star filled">★</span><span class="star">★</span>
+                <span class="review-count">( 0 Review )</span>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+                <div><span class="star">★</span><span class="star">★</span></div>
+              </div>
+              <h5 class="course-title">Master Course: From Beginner to Photoshop Pro</h5>
+              <div class="course-meta">
+                <span><i class="bi bi-clock"></i> 10 weeks</span>
+                <span><i class="bi bi-bookmark"></i> All levels</span>
+                <span><i class="bi bi-people"></i> 0 Student</span>
+              </div>
+              <hr class="course-divider"/>
+              <div class="course-footer">
+                <div class="course-author">
+                  <img src="https://i.pravatar.cc/36?img=3" alt="Admin"/>
+                  <a href="#">Admin</a>
+                </div>
+                <span class="course-price">$24.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end row -->
+
+      <!-- Explore More Button -->
+      <div class="text-center mt-5">
+        <a href="#" class="btn-explore">Explore More</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATS BANNER -->
+  <section class="stats-banner">
+    <div class="stats-circle-deco"></div>
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-around align-items-center row-gap-4">
+
+        <div class="stat-item">
+          <span class="stat-number">1,200+</span>
+          <span class="stat-label">Enrolled Students</span>
+        </div>
+
+        <div class="stat-divider d-none d-md-block"></div>
+
+        <div class="stat-item">
+          <span class="stat-number">900+</span>
+          <span class="stat-label">Completed Courses</span>
+        </div>
+
+        <div class="stat-divider d-none d-md-block"></div>
+
+        <div class="stat-item">
+          <span class="stat-number">99%</span>
+          <span class="stat-label">Positive Ratings</span>
+        </div>
+
+        <div class="stat-divider d-none d-md-block"></div>
+
+        <div class="stat-item">
+          <span class="stat-number">850+</span>
+          <span class="stat-label">Achieved Certificate</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-choose-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Left: text -->
+        <div class="col-lg-6">
+          <h2 class="why-title">Why Choose Us</h2>
+
+          <div class="why-item">
+            <div class="why-icon">
+              <!-- Instructor icon -->
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="32" cy="18" r="10"/>
+                <path d="M12 54c0-11 8.954-20 20-20s20 8.954 20 20"/>
+                <circle cx="32" cy="18" r="4" fill="var(--blue-primary)" stroke="none" opacity=".15"/>
+                <rect x="24" y="44" width="16" height="4" rx="2" stroke="none" fill="var(--blue-primary)" opacity=".12"/>
+                <path d="M20 30 L32 38 L44 30" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="why-text">
+              <h5>Expert &amp; experienced instructors</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon">
+              <!-- Diploma / screen icon -->
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <rect x="8" y="12" width="48" height="32" rx="3"/>
+                <path d="M24 44v8M40 44v8M18 52h28"/>
+                <path d="M22 28l6 6 14-14" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="why-text">
+              <h5>Lifetime free access</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+            </div>
+          </div>
+
+          <div class="why-item">
+            <div class="why-icon">
+              <!-- Headset support icon -->
+              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 32c0-11.046 8.954-20 20-20s20 8.954 20 20"/>
+                <rect x="8" y="30" width="10" height="14" rx="5"/>
+                <rect x="46" y="30" width="10" height="14" rx="5"/>
+                <path d="M56 44v4a6 6 0 01-6 6H34"/>
+                <circle cx="32" cy="54" r="3"/>
+              </svg>
+            </div>
+            <div class="why-text">
+              <h5>Dedicated support</h5>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: stacked images -->
+        <div class="col-lg-6">
+          <div class="why-images">
+            <img class="why-img-top"
+              src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=700&h=420&fit=crop"
+              alt="Student working"/>
+            <img class="why-img-bottom"
+              src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=420&fit=crop"
+              alt="Team working"/>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Testimonials</h2>
+        <p class="section-sub">Our student feedback obut about courses</p>
+      </div>
+
+      <div class="row g-4" id="testiSlide">
+
+        <!-- Card 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testi-card">
+            <div class="testi-quote">&ldquo;</div>
+            <div class="testi-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+            <p class="testi-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.</p>
+            <div class="testi-author">
+              <img src="https://i.pravatar.cc/80?img=12" alt="Adam Smith"/>
+              <div>
+                <p class="testi-author-name">Adam Smith</p>
+                <p class="testi-author-role">Web Designer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testi-card">
+            <div class="testi-quote">&ldquo;</div>
+            <div class="testi-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+            <p class="testi-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.</p>
+            <div class="testi-author">
+              <img src="https://i.pravatar.cc/80?img=8" alt="Shane Kyle"/>
+              <div>
+                <p class="testi-author-name">Shane Kyle</p>
+                <p class="testi-author-role">Web Designer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="testi-card">
+            <div class="testi-quote">&ldquo;</div>
+            <div class="testi-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+            <p class="testi-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.</p>
+            <div class="testi-author">
+              <img src="https://i.pravatar.cc/80?img=53" alt="Jack Morkel"/>
+              <div>
+                <p class="testi-author-name">Jack Morkel</p>
+                <p class="testi-author-role">Web Designer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end row -->
+
+      <!-- Dots -->
+      <div class="testi-dots">
+        <button class="testi-dot active" onclick="setDot(0, this)"></button>
+        <button class="testi-dot" onclick="setDot(1, this)"></button>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- OUR BLOG -->
+  <section class="blog-section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-title">Our Blog</h2>
+        <p class="section-sub">Get latest news and updates</p>
+      </div>
+
+      <div class="row g-4">
+
+        <!-- Blog Card 1 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=700&h=420&fit=crop" alt="JavaScript Course"/>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="bi bi-person"></i> admin</span>
+                <span><i class="bi bi-calendar3"></i> April 2, 2023</span>
+              </div>
+              <h5 class="blog-title">The Complete JavaScript Course Beginner to Advanced</h5>
+              <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel,</p>
+              <a href="#" class="blog-read-more">Read More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Card 2 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=700&h=420&fit=crop" alt="HTML CSS Course"/>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="bi bi-person"></i> admin</span>
+                <span><i class="bi bi-calendar3"></i> March 10, 2023</span>
+              </div>
+              <h5 class="blog-title">The Complete Html and CSS Mastery With Real Projects</h5>
+              <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel,</p>
+              <a href="#" class="blog-read-more">Read More</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Card 3 -->
+        <div class="col-lg-4 col-md-6">
+          <div class="blog-card">
+            <div class="blog-img-wrap">
+              <img src="https://images.unsplash.com/photo-1587440871875-191322ee64b0?w=700&h=420&fit=crop" alt="Python Career"/>
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span><i class="bi bi-person"></i> admin</span>
+                <span><i class="bi bi-calendar3"></i> March 10, 2023</span>
+              </div>
+              <h5 class="blog-title">Expand Your Career Opportunities with Python</h5>
+              <p class="blog-excerpt">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel,</p>
+              <a href="#" class="blog-read-more">Read More</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-5">
+
+        <!-- Col 1: Brand + description -->
+        <div class="col-lg-3 col-md-6">
+          <a href="#" class="footer-brand">
+            <div class="footer-brand-icon"><i class="bi bi-book-half"></i></div>
+            <span class="footer-brand-text">Academia</span>
+          </a>
+          <p class="footer-desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.</p>
+        </div>
+
+        <!-- Col 2: Useful Links -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-col-title">Useful Links</h5>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Terms &amp; Condition</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Purchase Guide</a></li>
+            <li><a href="#">Customer Support</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Course Categories -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-col-title">Course Categories</h5>
+          <ul class="footer-links">
+            <li><a href="#">Business</a></li>
+            <li><a href="#">Data Science</a></li>
+            <li><a href="#">Development</a></li>
+            <li><a href="#">Graphic Design</a></li>
+            <li><a href="#">Marketing</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Recent Post -->
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-col-title">Recent Post</h5>
+          <ul class="footer-links">
+            <li><a href="#">The Complete JavaScript Course Beginner to Advanced</a></li>
+            <li><a href="#">The Complete Html and CSS Mastery With Real Projects</a></li>
+            <li><a href="#">Expand Your Career Opportunities with Python</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p>All Rights Reserved by ThemeXpert</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function setDot(index, el) {
+      document.querySelectorAll('.testi-dot').forEach(d => d.classList.remove('active'));
+      el.classList.add('active');
+    }
+  </script>
+</body>
+</html>
